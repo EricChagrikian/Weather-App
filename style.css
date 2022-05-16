@@ -56,12 +56,17 @@ body {
 
 header i {
     cursor: pointer;
-    font-size: 50px;
+    font-size: 0px;
     margin-right: 8px;
 }
 
-.inputUser {
-  /*  display: none; */
+.wrapper.active header i{
+    font-size: 50px;
+    margin-left: 5px;
+}
+
+.wrapper.active .inputUser {
+    display: none;
 }
 
 .inputUser :where(input, button) {
@@ -112,10 +117,14 @@ button:hover {
 
 .weatherInput {
     margin: 30px 0 0;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+.wrapper.active .weatherInput{
+    display: flex;
 }
 
 .weatherInput img {
@@ -129,7 +138,7 @@ button:hover {
 }
 
 .weatherInput .temp .numb {
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .weatherInput .temp .deg {
@@ -139,7 +148,7 @@ button:hover {
 }
 
 .weather {
-    font-size: 21px;
+    font-size: 25px;
     text-align: center;
     margin: -5px 20px 15px;
 }
@@ -147,7 +156,7 @@ button:hover {
 .location {
     display: flex;
     align-items: center;
-    font-size: 21px;
+    font-size: 25px;
     margin-bottom: 30px;
 }
 
