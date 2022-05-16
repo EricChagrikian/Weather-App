@@ -60,6 +60,9 @@ header i {
     margin-right: 8px;
 }
 
+.inputUser {
+    display: none;
+}
 
 .inputUser :where(input, button) {
     width: 100%;
