@@ -213,13 +213,16 @@ button:hover {
 
 #forecast {
     color: #222;
-    display: flex;
+    display: none;
     flex-direction: row;
     flex-wrap: nowrap;
     font-family: 'Helvetica','Arial',sans-serif;
-    margin: 40px auto;
-    width: 600px;
 }
+
+.wrapper.active #forecast {
+    display: flex;
+}
+
 #forecast p {
     margin: 0;
 }

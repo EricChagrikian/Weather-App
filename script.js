@@ -6,6 +6,8 @@ locationBtn = inputPart.querySelector("button"),
 weatherPart = wrapper.querySelector(".weatherInput"),
 wIcon = weatherPart.querySelector("img"),
 arrowBack = wrapper.querySelector("header i");
+let MyCity = {};    
+let MyCountry = {};  
 
 let api;
 
@@ -49,6 +51,7 @@ function fetchData(){
         infoTxt.innerText = "Something went wrong";
         infoTxt.classList.replace("pending", "error");
     });
+    
 }
 
 function weatherDetails(info){
@@ -57,6 +60,8 @@ function weatherDetails(info){
         infoTxt.innerText = `${inputField.value} isn't a valid city name`;
     }else{
         //getting required properties value from the whole weather information
+    //    const city = MyCity.info.name;
+    //    const country = MyCountry.info.sys.country;
         const city = info.name;
         const country = info.sys.country;
         const {description, id} = info.weather[0];
@@ -95,37 +100,42 @@ arrowBack.addEventListener("click", ()=>{
 });
 
 
+// fetchForecast = function () {
+// 	var endpoint =
+// 		"https://api.openweathermap.org/data/2.5/onecall?lat=38.7267&lon=-9.1403&exclude=current,hourly,minutely,alerts&units=metric&appid=3d485f11f9e38b982799d035833d8d41";
+// 	var forecastEl = document.getElementsByClassName("forecast");
 
- window.onload = () => {
+// 	fetch(endpoint)
+// 	.then(function (response) {
+// 		if (200 !== response.status) {
+// 			console.log(
+// 				"Looks like there was a problem. Status Code: " + response.status
+// 			);
+// 			return;
+// 		}
 
-     const target = document.getElementById('forecast');
-     const aeris = new AerisWeather('CLIENT_ID', 'CLIENT_SECRET');
+// 		forecastEl[0].classList.add('loaded');
 
-     const request = aeris.api().endpoint('forecasts').place('minneapolis,mn').limit(5);
-     request.get().then((result) => {
-         const data = result.data;
-         const { periods } = data[0];
-         if (periods) {
-             periods.reverse().forEach(period => {
-                 const date = new Date(period.dateTimeISO);
-                 const icon = `https://cdn.aerisapi.com/wxblox/icons/${period.icon || 'na.png'}`;
-                 const maxTempF = period.maxTempF || 'N/A';
-                 const minTempF = period.minTempF || 'N/A';
-                 const weather = period.weatherPrimary || 'N/A';
-
-                //  const html = (`
-                //      <div class="card">
-                //          <div class="card-body">
-                //              <p class="title">${aeris.utils.dates.format(date, 'eeee')}</p>
-                //              <p><img class="icon" src="${icon}"></p>
-                //              <p class="wx">${weather}</p>
-                //              <p class="temps"><span>High:</span>${maxTempF} <span>Low:</span>${minTempF}</p>
-                //          </div>
-                //      </div>
-                //  `);
-
-                 target.insertAdjacentHTML('afterbegin', html);
-             });
-         }
-     }); 
- }
+// 		response.json().then(function (data) {
+// 			var fday = "";
+// 			data.daily.forEach((value, index) => {
+// 				if (index > 0) {
+// 					var dayname = new Date(value.dt * 1000).toLocaleDateString("en", {
+// 						weekday: "long",
+// 					});
+// 					var icon = value.weather[0].icon;
+// 					var temp = value.temp.day.toFixed(0);
+// 					fday = `<div class="forecast-day">
+// 						<p>${dayname}</p>
+// 						<p><span class="ico-${icon}" title="${icon}"></span></p>
+// 						<div class="forecast-day--temp">${temp}<sup>°C</sup></div>
+// 					</div>`;
+// 					forecastEl[0].insertAdjacentHTML('beforeend', fday);
+// 				}
+// 			});
+// 		});
+// 	})
+// 	.catch(function (err) {
+// 		console.log("Fetch Error :-S", err);
+// 	});
+// };

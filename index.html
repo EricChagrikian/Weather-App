@@ -50,8 +50,49 @@
                 </div>
             </div>
         </section>
-    </div>
+    <section class="forecast">
     <div id="forecast"></div>
     <script src="script.js"></script>
+    <script>
+     
+        window.onload = () => {
+     
+            const target = document.getElementById('forecast');
+            const aeris = new AerisWeather('fbpkxSlnNOfO1nMbYvfRE', 'fEOOlLAVegiGpkB8H3HirKB9jKt0huJXSLflb1fq');
+        //  const request = aeris.api().endpoint('forecasts').place(`${MyCity}`,`${MyCountry}`).limit(5); 
+            const request = aeris.api().endpoint('forecasts').place(`brussels, be`).limit(5);
+            request.get().then((result) => {
+                console.log(request)
+                const data = result.data;
+                const { periods } = data[0];
+                if (periods) {
+                    periods.reverse().forEach(period => {
+                        const date = new Date(period.dateTimeISO);
+                        const icon = `https://cdn.aerisapi.com/wxblox/icons/${period.icon || 'na.png'}`;
+                        const maxTempF = period.maxTempF || 'N/A';
+                        const minTempF = period.minTempF || 'N/A';
+                        const weather = period.weatherPrimary || 'N/A';
+    
+                        const html = (`
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="title">${aeris.utils.dates.format(date, 'eeee')}</p>
+                                    <p><img class="icon" src="${icon}"></p>
+                                    <p class="wx">${weather}</p>
+                                    <p class="temps"><span>High:</span>${maxTempF} <span>Low:</span>${minTempF}</p>
+                                </div>
+                            </div>
+                        `);
+    
+                        target.insertAdjacentHTML('afterbegin', html);
+                    });
+                }
+            }); 
+        }
+        
+    </script>
+    </div>
+    </section>
+
 </body>
 </html>
